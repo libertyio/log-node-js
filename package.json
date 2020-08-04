@@ -1,0 +1,61 @@
+{
+  "name": "@libertyio/log-node",
+  "version": "0.1.0",
+  "description": "Write messages to stderr and stdout",
+  "main": "dist/main.umd.js",
+  "module": "src/main",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "exit 0",
+    "build": "rollup -c",
+    "lint": "eslint --fix src/**",
+    "deps": "exit 0",
+    "pkg": "exit 0",
+    "start": "exit 0",
+    "test": "mocha ./test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/libertyio/log-node-js.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "keywords": [
+    "error",
+    "warn",
+    "info",
+    "ok",
+    "trace",
+    "print",
+    "log"
+  ],
+  "author": "Liberty Infrasystems LLC <someone@liberty.io> (https://liberty.io)",
+  "contributors": [
+    "Jonathan Buhacoff <jonathan@liberty.io> (https://github.com/jbuhacoff)"
+  ],
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/libertyio/log-node-js/issues"
+  },
+  "homepage": "https://github.com/libertyio/log-node-js#readme",
+  "dependencies": {
+    "colors": "^1.3.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@libertyio/commitlint-config": "^1.0.0",
+    "@libertyio/commitlint-config-type-enum": "^1.0.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-mocha": "^6.3.0",
+    "husky": "^3.1.0",
+    "mocha": "^6.2.3",
+    "rollup": "^1.32.1"
+  }
+}
