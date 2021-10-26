@@ -14,61 +14,66 @@ const { Log } = require('@libertyio/log-node-js');
 const log = new Log();
 log.error('an error message');
 log.warn('a warning message');
-log.info('an info messsage');
 log.ok('a success message');
+log.info('an info messsage');
 log.trace('a trace message');
 log.print('raw output without a log level');
 ```
 
-# Application wrapper
+# Sample code
 
-If you're writing a NodeJS application and you need to use the log module from
-many components, you probably don't want to repeat the same code in each module
-to configure the log.
-
-Here is a NodeJS example of writing a wrapper module that you can use throughout
-your application:
+It's easy to initialize a log object:
 
 ```
 const { Log } = require('@libertyio/log-node-js');
-
-const { LOG_LEVEL } = process.env;
-
-let level = LOG_LEVEL || 'info';
-let stream = process.stderr;
-let log;
-
-switch (level) {
-    case 'error':
-        log = new Log({ tag: 'MY_APP', enable: { error: true, warn: false, info: false, ok: false, trace: false, print: true }});
-        break;
-    case 'warn':
-        log = new Log({ tag: 'MY_APP', enable: { error: true, warn: true, info: false, ok: false, trace: false, print: true }});
-        break;
-    case 'info':
-        log = new Log({ tag: 'MY_APP', enable: { error: true, warn: true, info: true, ok: true, trace: false, print: true }});
-        break;
-    case 'trace':
-        log = new Log({ tag: 'MY_APP', enable: { error: true, warn: true, info: true, ok: true, trace: true, print: true }, stream });
-        break;
-    default:
-        // if enviornment contains invalid log level, default to info and display a warning
-        log = new Log({ tag: 'MY_APP', enable: { error: true, warn: true, info: true, ok: true, trace: false, print: true }});
-        log.warn(`invalid log level selected: ${level}`);
-        break;        
-}
-
-export {
-    log,
-};
+const { LOG_LEVEL = 'info' } = process.env;
+const log = new Log({ tag: 'MY_APP', level: LOG_LEVEL });
 ```
 
-Then in your application you just do this:
+The `LOG_LEVEL` environment variable is just a suggestion.
+It can be named anything you want, or you can use a command line
+parameter, or pre-configured setting.
+
+# Options
+
+The following options can be passed to the constructor:
+
+**tag** (string)
+Prefix every log message with `[tag]`. This can be useful to identify which component
+is emitting a log message. Default is `null` which means to not display a tag.
+
+**withLevel** (boolean)
+Prefix every log message with `level:`. This can be useful when the output does not
+support colors so the log level of each message is evident. In a color terminal,
+it might be redundant. Default is `true` which means to show the level.
+
+**level** (string)
+Show log messages only for this level and above. The levels are:
+
+* error
+* warn
+* ok
+* info
+* trace
+
+The default is 'info' which means to show all messages marked 'info' and above.
+
+**enable** (object)
+Override the level setting. You can use this to show or hide 'print' messages,
+and also to create customized configurations like showing 'error' and 'trace'
+but not the other levels.
+
+An enable object can look like this:
 
 ```
-const { log } = require('your_wrapper');
-log.info('an info messsage');
+{ error: true, warn: true, ok: true, info: true, trace: true, print: true }
 ```
 
-So you can change the log level everywhere by setting the environment variable
-`LOG_LEVEL` before you start the application.
+You only need to specify the log message types you want to override.
+
+The default is an empty object which means no overrides.
+
+**stream** (object)
+Print the log messages to the specified stream. The default is `process.stderr`.
+You can set this to `process.stdout` if you want log messages to be printed
+to stdout instead of stderr.
