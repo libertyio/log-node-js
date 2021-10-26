@@ -10,7 +10,7 @@ Write messages to stderr and stdout. Features include:
 Example:
 
 ```
-const { Log } = require('@libertyio/log-node-js');
+import { Log } from '@libertyio/log-node-js';
 const log = new Log();
 log.error('an error message');
 log.warn('a warning message');
@@ -25,7 +25,7 @@ log.print('raw output without a log level');
 It's easy to initialize a log object:
 
 ```
-const { Log } = require('@libertyio/log-node-js');
+import { Log } from '@libertyio/log-node-js';
 const { LOG_LEVEL = 'info' } = process.env;
 const log = new Log({ tag: 'MY_APP', level: LOG_LEVEL });
 ```
