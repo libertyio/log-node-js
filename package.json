@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/libertyio/log-node-js#readme",
   "dependencies": {
-    "colors": "^1.4.0"
+    "@libertyio/colors-node-js": "^1.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
