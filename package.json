@@ -1,6 +1,6 @@
 {
   "name": "@libertyio/log-node-js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Write messages to stderr and stdout",
   "type": "module",
   "module": "src/main.js",
