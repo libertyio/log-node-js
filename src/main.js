@@ -2,7 +2,7 @@
 Copyright (C) 2020 Liberty Infrasystems LLC. All rights reserved.
 */
 
-import colors from 'colors';
+import colors from '@libertyio/colors-node-js';
 
 /*
 The `enable` option controls which methods produce output -- default is all of them. To
